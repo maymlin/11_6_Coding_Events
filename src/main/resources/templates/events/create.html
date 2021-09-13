@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Create Event</h1>
+    <nav th:replace="fragments :: navigation"></nav>
     <form method="post" action="/events/create">  <!-- 11.6.5 could leave off action attribute -->
         <input type="text" name="eventName" />
         <input type="submit" value="Create Event" />
