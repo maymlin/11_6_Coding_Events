@@ -24,6 +24,22 @@
             <li class="nav-item"><a class="nav-link" href="/events/create">Create Event</a></li>
         </ul>
     </nav>
+    <table th:fragment="eventsTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>URL</th>
+        </tr>
+        </thead>
+        <!--        https://www.youtube.com/watch?v=BbYY92gDC-Q-->
+        <tr th:each="event : ${events}">
+            <td th:text="${event.key}"></td>
+            <td th:text="${event.value[0]}"></td>
+<!--            https://www.thymeleaf.org/doc/articles/standardurlsyntax.html-->
+            <td><a th:href="@{${event.value[1]}}" th:text="${event.value[1]}"></a></td>
+        </tr>
+    </table>
 </body>
 
 <!--replaced by Bootstrap in 11.9-->

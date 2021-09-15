@@ -3,16 +3,8 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
     <header th:replace="fragments :: header"></header>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tr th:each="event : ${events}">
-            <td th:text="${event}"></td>
-        </tr>
-    </table>
+    <table th:replace="fragments :: eventsTable"></table>
+
 
 <!--  replaced by Bootstrap in 11.9  -->
 <!--<h1>All Events</h1>-->
