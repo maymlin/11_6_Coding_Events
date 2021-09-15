@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<!--replaced by Bootstrap in 11.9-->
+<!--<head th:fragment="head">-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title>Coding Events</title>-->
+<!--    <script th:src="@{script.js}"></script>-->
+<!--    <link rel="stylesheet" th:href="@{/styles.css}" />-->
+<!--</head>-->
+
+<!-- 11.9. Bootstrap -->
+<!--https://www.youtube.com/watch?v=w-f3NYHHe9Q-->
 <head th:fragment="head">
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <title>Coding Events</title>
-    <script th:src="@{script.js}"></script>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <nav th:fragment="navigation">
-        <ul>
-            <li><a href="/events">All Events</a></li>
-            <li><a href="/events/create">Create Events</a></li>
+    <nav th:fragment="header">
+        <h1>Coding Events</h1>
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="/events">All Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="/events/create">Create Event</a></li>
         </ul>
     </nav>
 </body>
+
+<!--replaced by Bootstrap in 11.9-->
+<!--<body>-->
+<!--    <nav th:fragment="navigation">-->
+<!--        <ul>-->
+<!--            <li><a href="/events">All Events</a></li>-->
+<!--            <li><a href="/events/create">Create Events</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</body>-->
 </html>
