@@ -17,11 +17,39 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
+    private static List<Event> events = new ArrayList<>();
 
+    // https://www.youtube.com/watch?v=LnpJcq33uoM
+    // 11.6.7. Add a Form Handler Method - Text
+    @GetMapping
+    public String displayAllEvents(Model model) {
+        model.addAttribute("title", "All Events");  // Added in 12.2
+        model.addAttribute("events", events);
+        return "events/index";
+    }
+
+    @GetMapping("create")
+    public String displayCreateEventForm(Model model) {
+        model.addAttribute("title", "Create Event");
+        return "events/create";
+    }
+
+    // https://www.youtube.com/watch?v=5dtyojtADbk
+    // 12.2. Create a Model
+    @PostMapping("create")
+    public String processCreateEventForm(@RequestParam String eventName,
+                                         @RequestParam String eventDescription) {
+        events.add(new Event(eventName, eventDescription));
+        return "redirect:";
+    }
+
+    /*
+    // Replaced by a new events List variable in 12.2 Create a Model
     // 11.6.7. Add a Form Handler Method - Text
     private static List<String> events = new ArrayList<>();
+    */
 
-    /**
+    /*
     // https://www.youtube.com/watch?v=hmgxMOf51JU
     // 11.6.2 Coding Events Setup - Video
     // replaced in "11.6.7. Add a Form Handler Method - Text" below
@@ -39,32 +67,6 @@ public class EventController {
     }
     */
 
-    // https://www.youtube.com/watch?v=LnpJcq33uoM
-    // 11.6.7. Add a Form Handler Method - Text
-    @GetMapping
-    public String displayAllEvents(Model model) {
-        model.addAttribute("events", events);
-        return "events/index";
-    }
-
-    // https://www.youtube.com/watch?v=lgT962si4eQ
-    // 11.6.5. Create and Render a Form - Text
-    // lives at /events/create
-    @GetMapping("create")
-    public String renderCreateEventForm() {
-        return "events/create";
-    }
-
-
-    // https://www.youtube.com/watch?v=5dtyojtADbk
-    // 12.2. Create a Model
-    @PostMapping("create")
-    public String processCreateEventForm(@RequestParam String eventName,
-                                         @RequestParam String eventDescription) {
-        events.add(new Event(eventName, eventDescription));
-        return "redirect:";
-    }
-
     /*
     // replaced by processCreateEventForm() in 12.2 Create a Model to accommodate models
     // https://www.youtube.com/watch?v=LnpJcq33uoM
@@ -75,6 +77,17 @@ public class EventController {
     public String createEvent(@RequestParam String eventName) {
         events.add(eventName);
         return "redirect:"; // return a 300 redirect response
+    }
+     */
+
+    /*
+    // replaced in 12.2 Create a Model by displayCreateEventForm()
+    // https://www.youtube.com/watch?v=lgT962si4eQ
+    // 11.6.5. Create and Render a Form - Text
+    // lives at /events/create
+    @GetMapping("create")
+    public String renderCreateEventForm() {
+        return "events/create";
     }
      */
 
