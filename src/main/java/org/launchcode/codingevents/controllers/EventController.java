@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,19 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
-    private static List<Event> events = new ArrayList<>();
+//    replaced by EventData class in 12.3.3 Create a Data Layer
+//    private static List<Event> events = new ArrayList<>();
 
+    @GetMapping
+    public String displayAllEvents(Model model) {
+        model.addAttribute("title", "All Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/index";
+    }
+
+    /*
+    // https://www.youtube.com/watch?v=8AQtYZ_q57M
+    // Re-factored in 12.3 Models and Data
     // https://www.youtube.com/watch?v=LnpJcq33uoM
     // 11.6.7. Add a Form Handler Method - Text
     @GetMapping
@@ -27,6 +39,7 @@ public class EventController {
         model.addAttribute("events", events);
         return "events/index";
     }
+     */
 
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
@@ -39,7 +52,8 @@ public class EventController {
     @PostMapping("create")
     public String processCreateEventForm(@RequestParam String eventName,
                                          @RequestParam String eventDescription) {
-        events.add(new Event(eventName, eventDescription));
+
+        EventData.add(new Event(eventName, eventDescription));
         return "redirect:";
     }
 
