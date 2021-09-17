@@ -51,18 +51,29 @@ public class EventController {
         return "redirect:";
     }
 
-    /*
-    //Re-write method in 12.4 Model-Binding
-    // https://www.youtube.com/watch?v=5dtyojtADbk
-    // 12.2. Create a Model
-    @PostMapping("create")
-    public String processCreateEventForm(@RequestParam String eventName,
-                                         @RequestParam String eventDescription) {
+    // 12.5 Exercise
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        Event eventToEdit = EventData.getById(eventId);
+        model.addAttribute("event", eventToEdit);
+        String title = "Edit Event" + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
+        model.addAttribute("title", title);
+        return "events/edit";
+    }
 
-        EventData.add(new Event(eventName, eventDescription));
+    // 12.5 Exercise
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String description) {
+        Event eventToEdit = EventData.getById(eventId);
+
+        if (name.length() > 0) {
+            eventToEdit.setName(name);
+        }
+        if (description.length() > 0) {
+            eventToEdit.setEventDescription(description);
+        }
         return "redirect:";
     }
-    */
 
     // 12.3.5. Delete an Event - Video
     // https://www.youtube.com/watch?v=orsBBbDaJMM
@@ -139,4 +150,17 @@ public class EventController {
 //
 //        return "events/index";
 //    }
+
+    /*
+    //Re-write method in 12.4 Model-Binding
+    // https://www.youtube.com/watch?v=5dtyojtADbk
+    // 12.2. Create a Model
+    @PostMapping("create")
+    public String processCreateEventForm(@RequestParam String eventName,
+                                         @RequestParam String eventDescription) {
+
+        EventData.add(new Event(eventName, eventDescription));
+        return "redirect:";
+    }
+    */
 }
