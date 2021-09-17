@@ -4,10 +4,7 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -47,6 +44,15 @@ public class EventController {
         return "events/create";
     }
 
+    // 12.4 Model-Binding
+    @PostMapping("create")
+    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+        EventData.add(newEvent);
+        return "redirect:";
+    }
+
+    /*
+    //Re-write method in 12.4 Model-Binding
     // https://www.youtube.com/watch?v=5dtyojtADbk
     // 12.2. Create a Model
     @PostMapping("create")
@@ -56,6 +62,7 @@ public class EventController {
         EventData.add(new Event(eventName, eventDescription));
         return "redirect:";
     }
+    */
 
     // 12.3.5. Delete an Event - Video
     // https://www.youtube.com/watch?v=orsBBbDaJMM
