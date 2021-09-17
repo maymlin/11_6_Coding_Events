@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 
 
@@ -54,6 +54,28 @@ public class EventController {
                                          @RequestParam String eventDescription) {
 
         EventData.add(new Event(eventName, eventDescription));
+        return "redirect:";
+    }
+
+    // 12.3.5. Delete an Event - Video
+    // https://www.youtube.com/watch?v=orsBBbDaJMM
+    @GetMapping("delete")
+    public String displayDeleteEventForm(Model model) {
+        model.addAttribute("tittle", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+
+        return "events/delete";
+    }
+
+    // 12.3.5. Delete an Event - Video
+    // https://www.youtube.com/watch?v=orsBBbDaJMM
+    @PostMapping("delete")
+    public String processDeleteEventForm(@RequestParam(required=false) int[] eventIds) {
+        if (eventIds != null) {
+            for (int id: eventIds) {
+                EventData.remove(id);
+            }
+        }
         return "redirect:";
     }
 
