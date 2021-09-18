@@ -4,7 +4,10 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -44,9 +47,16 @@ public class EventController {
         return "events/create";
     }
 
+    // 13.3 Validating Models in a Controller
     // 12.4 Model-Binding
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
+                                         Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Create Event");
+            model.addAttribute("errorMsg", "Bad data!");
+            return "events/create";
+        }
         EventData.add(newEvent);
         return "redirect:";
     }
