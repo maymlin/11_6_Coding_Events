@@ -1,6 +1,6 @@
 package org.launchcode.codingevents.models;
 
-//Must first add the following to buld.gradle dependencies before javax.validation.constraints.* can be imported:
+//Must first add the following to build.gradle dependencies before javax.validation.constraints.* can be imported:
 //        implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 import javax.validation.constraints.Email;
@@ -9,25 +9,30 @@ import javax.validation.constraints.Size;
 
 
 public class Event {
-    private final int id;
+    private int id;
     private static int nextId = 1;
 
-    @NotBlank
+    @NotBlank(message="Name is required")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
     @Size(max = 500, message = "Description too long!")
     private String eventDescription;
 
-    @NotBlank
-    @Email(message = "Invalid email. Try again.")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email. Try again")
     private String contactEmail;
 
+    // Created in 13.4 Thymeleaf Form Tools
+    public Event() {
+        this.id = this.nextId;
+        nextId++;
+    }
+
     public Event(String eventName, String eventDescription, String contactEmail) {
+        this();
         this.name = eventName;
         this.eventDescription = eventDescription;
         this.contactEmail = contactEmail;
-        this.id = this.nextId;
-        this.nextId++;
     }
 
     public int getId() {

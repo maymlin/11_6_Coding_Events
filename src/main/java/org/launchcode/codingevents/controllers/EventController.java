@@ -44,8 +44,18 @@ public class EventController {
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
+        model.addAttribute(new Event());
         return "events/create";
     }
+
+    /*
+    // Replaced by new displayCreateEventForm in 13.4 ThymleafForm Tools
+    @GetMapping("create")
+    public String displayCreateEventForm(Model model) {
+        model.addAttribute("title", "Create Event");
+        return "events/create";
+    }
+     */
 
     // 13.3 Validating Models in a Controller
     // 12.4 Model-Binding

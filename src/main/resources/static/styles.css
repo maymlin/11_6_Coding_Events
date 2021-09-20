@@ -3,3 +3,7 @@ body {
     background-color: hsla(0, 100%, 30%, 0.3);
     color: hsla(0, 100%, 30%);
 }
+
+.error {
+    color: red;
+}
