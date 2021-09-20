@@ -18,6 +18,28 @@
             <p class="error" th:errors="${event.eventDescription}"></p>
         </div>
         <br>
+        <div class="form-group"> <!-- Added for 13.5 Exercises -->
+            <label>Location
+                <input th:field="${event.location}" class="form-control" />
+            </label>
+            <p class="error" th:errors="${event.location}"></p>
+        </div>
+        <br>
+        <div class="form-group"> <!-- Added for 13.5 Exercises -->
+            <label>Number of Attendees
+                <input th:field="${event.numberOfAttendees}" class="form-control" />
+            </label>
+            <p class="error" th:errors="${event.numberOfAttendees}"></p>
+        </div>
+        <br>
+        <div class="form-group"> <!-- Added for 13.5 Exercises -->
+            <label>
+                <input type="radio" th:field="${event.mustRegister}" value="true" />
+                Must Register
+            </label>
+            <p class="error" th:errors="${event.mustRegister}"></p>
+        </div>
+        <br>
         <div class="form-group">
             <label>Contact Email
                 <input th:field="${event.contactEmail}" class="form-control" />
