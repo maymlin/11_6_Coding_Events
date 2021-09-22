@@ -33,6 +33,8 @@ public class Event {
     @Email(message = "Invalid email. Try again")
     private String contactEmail;
 
+    private EventType type;
+
     // Created in 13.4 Thymeleaf Form Tools
     public Event() {
         this.id = this.nextId;
@@ -41,7 +43,8 @@ public class Event {
 
     // Added location, numberOfAtteendees and mustRegister for 13.5 Exercises
     public Event(String eventName, String eventDescription, String location,
-                 int numberOfAttendees, boolean mustRegister, String contactEmail) {
+                 int numberOfAttendees, boolean mustRegister, String contactEmail,
+                 EventType type) {
         this();
         this.name = eventName;
         this.eventDescription = eventDescription;
@@ -49,6 +52,7 @@ public class Event {
         this.numberOfAttendees = numberOfAttendees;
         this.mustRegister = mustRegister;
         this.contactEmail = contactEmail;
+        this.type = type;
     }
 
     public int getId() {
@@ -107,6 +111,16 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    // Added for 14.2 Enums in Model Classes
+    public EventType getType() {
+        return type;
+    }
+
+    // Added for 14.2 Enums in Model Classes
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
