@@ -3,12 +3,17 @@ package org.launchcode.codingevents.models;
 //Must first add the following to build.gradle dependencies before javax.validation.constraints.* can be imported:
 //        implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
-
+@Entity
 public class Event {
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
+//    private static int nextId = 1;    // Removed in 17.2 Accessing Data
 
     @NotBlank(message="Name is required")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
@@ -37,15 +42,15 @@ public class Event {
 
     // Created in 13.4 Thymeleaf Form Tools
     public Event() {
-        this.id = this.nextId;
-        nextId++;
+//        this.id = this.nextId;        // Removed in 17.2 Accessing Data
+//        nextId++;                     // When we added @Entity @Generated Value and @Id
     }
 
     // Added location, numberOfAtteendees and mustRegister for 13.5 Exercises
     public Event(String eventName, String eventDescription, String location,
                  int numberOfAttendees, boolean mustRegister, String contactEmail,
                  EventType type) {
-        this();
+//        this();       // Removed in 17.2 Accessing Data
         this.name = eventName;
         this.eventDescription = eventDescription;
         this.location = location;
