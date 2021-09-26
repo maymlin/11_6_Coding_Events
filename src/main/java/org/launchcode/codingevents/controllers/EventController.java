@@ -1,8 +1,9 @@
 package org.launchcode.codingevents.controllers;
 
-import org.launchcode.codingevents.data.EventData;
+import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,11 +14,14 @@ import javax.validation.Valid;
 //import java.util.ArrayList;
 //import java.util.List;
 
-
-
 @Controller
 @RequestMapping("events")
 public class EventController {
+
+    @Autowired  // Spring Boot should auto-populate this field // dependency injection
+    private EventRepository eventRepository;    // Created for 17.3 Repositories
+
+    // findAll, save, findById
 
 //    replaced by EventData class in 12.3.3 Create a Data Layer
 //    private static List<Event> events = new ArrayList<>();
@@ -25,7 +29,8 @@ public class EventController {
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
-        model.addAttribute("events", EventData.getAll());
+//        model.addAttribute("events", EventData.getAll());     // replaced with eventRepository in 17.3
+        model.addAttribute("events", eventRepository.findAll());
         return "events/index";
     }
 
@@ -69,7 +74,8 @@ public class EventController {
 //            model.addAttribute("errorMsg", "Bad data!");
             return "events/create";
         }
-        EventData.add(newEvent);
+//        EventData.add(newEvent);  // replaced in 17.3 by eventRepository.save()
+        eventRepository.save(newEvent);
         return "redirect:";
     }
 
@@ -91,7 +97,8 @@ public class EventController {
     @GetMapping("delete")
     public String displayDeleteEventForm(Model model) {
         model.addAttribute("tittle", "Delete Events");
-        model.addAttribute("events", EventData.getAll());
+//        model.addAttribute("events", EventData.getAll()); // replaced in 17.3 by eventRepository.findAll();
+        model.addAttribute("events", eventRepository.findAll());
 
         return "events/delete";
     }
@@ -102,7 +109,8 @@ public class EventController {
     public String processDeleteEventForm(@RequestParam(required=false) int[] eventIds) {
         if (eventIds != null) {
             for (int id: eventIds) {
-                EventData.remove(id);
+//                EventData.remove(id);     // replaced in 17.3 by eventRepository.deleteById();
+                eventRepository.deleteById(id);
             }
         }
         return "redirect:";
