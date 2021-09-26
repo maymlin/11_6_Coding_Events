@@ -9,10 +9,10 @@ import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 @Entity
-public class Event {
-    @Id
-    @GeneratedValue
-    private int id;
+public class Event extends AbstractEntity {
+//    @Id                       // Removed in 17.5 Studio
+//    @GeneratedValue           // Removed in 17.5 Studio
+//    private int id;           // Removed in 17.5 Studio
 //    private static int nextId = 1;    // Removed in 17.2 Accessing Data
 
     @NotBlank(message="Name is required")
@@ -60,9 +60,9 @@ public class Event {
         this.type = type;
     }
 
-    public int getId() {
-        return id;
-    }
+//    public int getId() {      // removed in 17.5 Studio Abstract Entity
+//        return id;
+//    }
 
     public String getName() {
         return name;
