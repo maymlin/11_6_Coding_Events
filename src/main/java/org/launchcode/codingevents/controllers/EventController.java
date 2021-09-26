@@ -51,7 +51,7 @@ public class EventController {
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute("event", new Event());
-        model.addAttribute("types", EventType.values());    // Added for 14.2 Enums in Model Classes
+//        model.addAttribute("types", EventType.values());    // Added for 14.2 Enums in Model Classes
         return "events/create";
     }
 
