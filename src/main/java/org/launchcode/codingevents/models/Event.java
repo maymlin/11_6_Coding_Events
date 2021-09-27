@@ -6,6 +6,8 @@ package org.launchcode.codingevents.models;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Event extends AbstractEntity {
@@ -27,6 +29,11 @@ public class Event extends AbstractEntity {
     @Valid  // Need to re-watch video https://www.youtube.com/watch?v=0yNIbAcd4ng
     @NotNull
     private EventDetails eventDetails;
+
+    // https://www.youtube.com/watch?v=qtbkUXAjpt4
+    // Added in 18.5.3. Creating a Many-to-Many Relationship
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
 
     /*
     // Move to EventDetails class in 18.4
@@ -123,6 +130,17 @@ public class Event extends AbstractEntity {
     // Created in 18.4
     public void setEventDetails(EventDetails eventDetails) {
         this.eventDetails = eventDetails;
+    }
+
+    // Added in 18.5.3. Creating a Many-to-Many Relationship
+    // the field is final, so it does not need a setter
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    // Added in 18.5.3. Creating a Many-to-Many Relationship
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
     }
 
     /*
