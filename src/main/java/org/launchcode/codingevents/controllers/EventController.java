@@ -3,6 +3,7 @@ package org.launchcode.codingevents.controllers;
 import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventCategory;
 import org.launchcode.codingevents.models.EventType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -30,6 +32,30 @@ public class EventController {
 //    replaced by EventData class in 12.3.3 Create a Data Layer
 //    private static List<Event> events = new ArrayList<>();
 
+    // https://www.youtube.com/watch?v=RLykFBY9Rys
+    // 18.3. Creating a One-to-Many Relationship
+    @GetMapping
+    public String displayAllEvents(@RequestParam(required=false) Integer categoryId, Model model) {
+        if (categoryId == null) {
+            model.addAttribute("title", "All Events");
+            model.addAttribute("events", eventRepository.findAll());
+        } else {
+            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid Category ID: " + categoryId);
+            } else {
+                EventCategory category = result.get();
+                model.addAttribute("title", "Events in category: " + category.getName());
+                model.addAttribute("events", category.getEvents());
+            }
+        }
+
+        return "events/index";
+    }
+
+    /*
+    // https://www.youtube.com/watch?v=RLykFBY9Rys
+    // Modified in 18.3. Creating a One-to-Many Relationship to include a @RequestParam
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
@@ -37,6 +63,7 @@ public class EventController {
         model.addAttribute("events", eventRepository.findAll());
         return "events/index";
     }
+     */
 
     /*
     // https://www.youtube.com/watch?v=8AQtYZ_q57M
