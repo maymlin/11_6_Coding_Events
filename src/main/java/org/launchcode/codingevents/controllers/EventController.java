@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
@@ -20,6 +21,9 @@ public class EventController {
 
     @Autowired  // Spring Boot should auto-populate this field // dependency injection
     private EventRepository eventRepository;    // Created for 17.3 Repositories
+
+    @Autowired
+    private EventCategoryRepository eventCategoryRepository;    // Created for 18.2
 
     // findAll, save, findById
 
@@ -51,7 +55,9 @@ public class EventController {
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute("event", new Event());
-//        model.addAttribute("types", EventType.values());    // Added for 14.2 Enums in Model Classes
+//        model.addAttribute("types", EventType.values());    // Added for 14.2 Enums in Model Classes // Removed for
+//        18.2
+        model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/create";
     }
 

@@ -6,6 +6,7 @@ package org.launchcode.codingevents.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
 
 @Entity
@@ -38,7 +39,11 @@ public class Event extends AbstractEntity {
     @Email(message = "Invalid email. Try again")
     private String contactEmail;
 
-    private EventType type;
+//    private EventType type; // Removed in 18.2
+
+    @ManyToOne  // Created in 18.2 one eventCategory for an event
+    @NotNull(message="Category is required")
+    private EventCategory eventCategory;
 
     // Created in 13.4 Thymeleaf Form Tools
     public Event() {
@@ -49,7 +54,7 @@ public class Event extends AbstractEntity {
     // Added location, numberOfAtteendees and mustRegister for 13.5 Exercises
     public Event(String eventName, String eventDescription, String location,
                  int numberOfAttendees, boolean mustRegister, String contactEmail,
-                 EventType type) {
+                 EventCategory eventCategory) {
 //        this();       // Removed in 17.2 Accessing Data
         this.name = eventName;
         this.eventDescription = eventDescription;
@@ -57,7 +62,7 @@ public class Event extends AbstractEntity {
         this.numberOfAttendees = numberOfAttendees;
         this.mustRegister = mustRegister;
         this.contactEmail = contactEmail;
-        this.type = type;
+        this.eventCategory = eventCategory;
     }
 
 //    public int getId() {      // removed in 17.5 Studio Abstract Entity
@@ -118,15 +123,23 @@ public class Event extends AbstractEntity {
         this.contactEmail = contactEmail;
     }
 
-    // Added for 14.2 Enums in Model Classes
-    public EventType getType() {
-        return type;
+    public EventCategory getEventCategory() {
+        return eventCategory;
+    }
+
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
     }
 
     // Added for 14.2 Enums in Model Classes
-    public void setType(EventType type) {
-        this.type = type;
-    }
+//    public EventType getType() {  // Removed in 18.2
+//        return type;
+//    }
+
+    // Added for 14.2 Enums in Model Classes
+//    public void setType(EventType type) {     // Removed in 18.2
+//        this.type = type;
+//    }
 
     @Override
     public String toString() {
