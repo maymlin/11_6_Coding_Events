@@ -13,38 +13,38 @@
         <br>
         <div class="form-group">
             <label>Description
-                <input th:field="${event.eventDescription}" class="form-control" />
+                <input th:field="${event.eventDetails.eventDescription}" class="form-control" />
             </label>
-            <p class="error" th:errors="${event.eventDescription}"></p>
+            <p class="error" th:errors="${event.eventDetails.eventDescription}"></p>
         </div>
         <br>
         <div class="form-group"> <!-- Added for 13.5 Exercises -->
             <label>Location
-                <input th:field="${event.location}" class="form-control" />
+                <input th:field="${event.eventDetails.location}" class="form-control" />
             </label>
-            <p class="error" th:errors="${event.location}"></p>
+            <p class="error" th:errors="${event.eventDetails.location}"></p>
         </div>
         <br>
         <div class="form-group"> <!-- Added for 13.5 Exercises -->
             <label>Number of Attendees
-                <input th:field="${event.numberOfAttendees}" class="form-control" />
+                <input th:field="${event.eventDetails.numberOfAttendees}" class="form-control" />
             </label>
-            <p class="error" th:errors="${event.numberOfAttendees}"></p>
+            <p class="error" th:errors="${event.eventDetails.numberOfAttendees}"></p>
         </div>
         <br>
         <div class="form-group"> <!-- Added for 13.5 Exercises -->
             <label>
-                <input type="radio" th:field="${event.mustRegister}" value="true" />
+                <input type="radio" th:field="${event.eventDetails.mustRegister}" value="true" />
                 Must Register
             </label>
-            <p class="error" th:errors="${event.mustRegister}"></p>
+            <p class="error" th:errors="${event.eventDetails.mustRegister}"></p>
         </div>
         <br>
         <div class="form-group">
             <label>Contact Email
-                <input th:field="${event.contactEmail}" class="form-control" />
+                <input th:field="${event.eventDetails.contactEmail}" class="form-control" />
             </label>
-            <p class="error" th:errors="${event.contactEmail}"></p>
+            <p class="error" th:errors="${event.eventDetails.contactEmail}"></p>
         </div>
         <br>
         <div class="form-group">

@@ -35,7 +35,7 @@ public class EventController {
     // https://www.youtube.com/watch?v=RLykFBY9Rys
     // 18.3. Creating a One-to-Many Relationship
     @GetMapping
-    public String displayAllEvents(@RequestParam(required=false) Integer categoryId, Model model) {
+    public String displayEvents(@RequestParam(required=false) Integer categoryId, Model model) {
         if (categoryId == null) {
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
@@ -55,7 +55,7 @@ public class EventController {
 
     /*
     // https://www.youtube.com/watch?v=RLykFBY9Rys
-    // Modified in 18.3. Creating a One-to-Many Relationship to include a @RequestParam
+    // Replaced with displayEvents in 18.3. Creating a One-to-Many Relationship
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");

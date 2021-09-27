@@ -19,11 +19,11 @@
         <tr th:each="event : ${events}">
             <td th:text="${event.id}"></td>
             <td th:text="${event.name}"></td>
-            <td th:text="${event.eventDescription}"></td>
-            <td th:text="${event.location}"></td>
-            <td th:text="${event.numberOfAttendees}"></td>
-            <td th:text="${event.mustRegister}"></td>
-            <td th:text="${event.contactEmail}"></td>
+            <td th:text="${event.eventDetails.eventDescription}"></td>
+            <td th:text="${event.eventDetails.location}"></td>
+            <td th:text="${event.eventDetails.numberOfAttendees}"></td>
+            <td th:text="${event.eventDetails.mustRegister}"></td>
+            <td th:text="${event.eventDetails.contactEmail}"></td>
             <td th:text="${event.eventCategory.name}"></td>
         </tr>
     </table>
