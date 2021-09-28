@@ -4,24 +4,43 @@
     <body class="container">
         <header th:replace="fragments :: header"></header>
         <table class="table table-striped">
-            <thead>
             <tr>
                 <th>Description</th>
-                <th>Location</th>
-                <th>Number of Attendees</th>
-                <th>Must Register</th>
-                <th>Contact Email</th>
-                <th>Category</th>
-            </tr>
-            </thead>
-            <tr>
                 <td th:text="${event.eventDetails.eventDescription}"></td>
+            </tr>
+            <tr>
+                <th>Location</th>
                 <td th:text="${event.eventDetails.location}"></td>
+            </tr>
+            <tr>
+                <th>Number of Attendees</th>
                 <td th:text="${event.eventDetails.numberOfAttendees}"></td>
+            </tr>
+            <tr>
+                <th>Must Register</th>
                 <td th:text="${event.eventDetails.mustRegister}"></td>
+            </tr>
+            <tr>
+                <th>Contact Email</th>
                 <td th:text="${event.eventDetails.contactEmail}"></td>
+            </tr>
+            <tr>
+                <th>Category</th>
                 <td th:text="${event.eventCategory.name}"></td>
             </tr>
+            <tr>
+                <th>Tags</th>
+                <td>
+                    <span th:each="tag : ${tags}" th:text="${tag.displayName}"></span>
+                </td>
+            </tr>
         </table>
+        <a th:href="'/events/add-tag?eventId=' + ${event.id}">Add Tag</a>
     </body>
 </html>
+
+
+
+
+
+
